@@ -1,0 +1,29 @@
+.nav-menu {
+  display: flex;
+
+  &_item {
+    display: flex;
+    cursor: pointer;
+
+    a {
+      margin: 0 8px 0 0;
+      cursor: pointer;
+      display: flex;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+      text-decoration: none;
+      line-height: 36px;
+      padding: 0 16px;
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba(0,0,0,.4);
+      }
+
+      &.is-active {
+        background: rgba(0,0,0,.2);
+      }
+    }
+  }
+}

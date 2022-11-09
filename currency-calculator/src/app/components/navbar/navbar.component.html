@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+  <ul class="nav-menu">
+    <li class="nav-menu_item" *ngFor="let link of links">
+      <a matRipple  [routerLink]="[link.link]" [routerLinkActive]="['is-active']">{{ link.name }}</a>
+    </li>
+  </ul>
+</mat-toolbar>

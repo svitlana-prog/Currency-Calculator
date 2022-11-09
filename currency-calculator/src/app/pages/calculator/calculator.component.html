@@ -1,0 +1,81 @@
+<div class="page page_calculator">
+  <h1>Currency Calculator</h1>
+
+  <div class="calculator-form">
+    <mat-card>
+      <div style="margin-bottom: 20px">
+        <mat-error *ngIf="error">{{error}}</mat-error>
+      </div>
+
+      <form [formGroup]="form">
+        <div class="calculator-form_row">
+          <div class="calculator-form_column">
+            <mat-form-field appearance="outline"
+                            (click)="picker.open()">
+              <mat-label>Choose a date</mat-label>
+              <input formControlName="date"
+                     [max]="maxDate" [readonly]="true" matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="calculator-form_column">
+            <mat-form-field appearance="outline">
+              <mat-label>Original Currency</mat-label>
+              <mat-select placeholder="Choose currency"
+                          formControlName="originalCurrency">
+                <mat-option *ngFor="let rate of exchangeRates$ | async" value="{{rate.CurrencyCodeL}}">
+                  {{rate.CurrencyCodeL}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+            <div class="calculator-form_column">
+              <mat-form-field appearance="outline">
+                <mat-label>Target Currency</mat-label>
+                <mat-select placeholder="Choose currency"
+                            formControlName="targetCurrency">
+                  <mat-option *ngFor="let rate of exchangeRates$ | async" value="{{rate.CurrencyCodeL}}">
+                    {{rate.CurrencyCodeL}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="calculator-form_row">
+          <div class="calculator-form_column">
+            <mat-form-field appearance="outline">
+              <mat-label>Amount</mat-label>
+              <input pattern="^[1-9]\d*(\.\d+)?$" matInput placeholder="Enter amount" formControlName="originalAmount">
+              <mat-error *ngIf="form.controls['originalAmount'].hasError('required')">
+                Amount is required
+              </mat-error>
+              <mat-error *ngIf="form.controls['originalAmount'].hasError('pattern')">
+                Allowed only numbers with an optional decimal point followed by digits
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="calculator-form_column">
+            <button (click)="calculateRate()"
+                    [disabled]="form.invalid"
+                    class="calculator-form_button"
+                    mat-raised-button color="primary">
+              Convert currency <mat-icon aria-hidden="false" fontIcon="arrow_forward"></mat-icon>
+            </button>
+          </div>
+
+          <div class="calculator-form_column">
+            <mat-form-field appearance="fill" disabled aria-readonly="true">
+              <mat-label>Converted Amount</mat-label>
+              <input matInput readonly formControlName="targetAmount">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
+

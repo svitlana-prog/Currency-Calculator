@@ -1,0 +1,33 @@
+.calculator-form {
+  max-width: 900px;
+  &_row {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 512px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &_column {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    @media screen and (max-width: 512px) {
+      width: 100%;
+    }
+  }
+
+  &_button {
+    height: 55px;
+    margin-bottom: 20px;
+
+    .mat-icon {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+    }
+  }
+}
+
